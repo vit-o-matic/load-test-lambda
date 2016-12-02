@@ -27,10 +27,11 @@ class LoadHitResultQueue {
 
   val sqs = new AmazonSQSClient(awsCredentials)
   sqs.setRegion(Region.getRegion(Regions.valueOf(config.getString("aws.region"))))
-  Try(sqs.createQueue(new CreateQueueRequest(queueName)))
 
   def enqueue(data: SingleHitResult, ctx: Context): String = {
-    val queueUrl = sqs.getQueueUrl(new GetQueueUrlRequest(queueName)).getQueueUrl
+    val clientQueueName = s"${queueName}_${data.getClientId}"
+    Try(sqs.createQueue(new CreateQueueRequest(clientQueueName)))
+    val queueUrl = sqs.getQueueUrl(new GetQueueUrlRequest(clientQueueName)).getQueueUrl
     val json = objectMapper.writeValueAsString(data)
     val messageId = sqs.sendMessage(queueUrl, json).getMessageId
     messageId
