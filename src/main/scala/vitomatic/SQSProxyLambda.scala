@@ -26,7 +26,7 @@ class LoadHitResultQueue {
   val queueName = config.getString("aws.sqs.queueName")
 
   val sqs = new AmazonSQSClient(awsCredentials)
-  sqs.setRegion(Region.getRegion(Regions.US_WEST_2)) //same region as EC2
+  sqs.setRegion(Region.getRegion(Regions.valueOf(config.getString("aws.region"))))
   Try(sqs.createQueue(new CreateQueueRequest(queueName)))
 
   def enqueue(data: SingleHitResult, ctx: Context): String = {
