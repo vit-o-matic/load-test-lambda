@@ -8,6 +8,7 @@ public class SingleHitResult {
     /*
     {
         "clientId": "ID",
+        "agentAddress": "127.0.0.1",
         "targetUrl": "URL",
         "statusCode": 200,
         "success": true,
@@ -16,6 +17,8 @@ public class SingleHitResult {
     }
      */
     private String clientId;
+
+    private String agentAddress;
 
     private String targetUrl;
 
@@ -33,6 +36,14 @@ public class SingleHitResult {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
+    }
+
+    public String getAgentAddress() {
+        return agentAddress;
+    }
+
+    public void setAgentAddress(String agentAddress) {
+        this.agentAddress = agentAddress;
     }
 
     public String getTargetUrl() {
