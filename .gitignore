@@ -1,0 +1,13 @@
+
+*.jar
+*.class
+*.lock
+
+.idea/
+lib_managed/
+**/target/
+
+project/.sbtserver
+project/.sbtserver
+
+src/main/resources/credentials.conf
